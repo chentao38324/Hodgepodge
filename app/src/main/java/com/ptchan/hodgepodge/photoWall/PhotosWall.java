@@ -18,6 +18,7 @@ public class PhotosWall extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photos_wall);
+        gvPic = (GridView)findViewById(R.id.gv_pic);
         mGvAdapter = new GVAdapter(this,0, Images.imageThumbUrls,gvPic);
         gvPic.setAdapter(mGvAdapter);
     }
