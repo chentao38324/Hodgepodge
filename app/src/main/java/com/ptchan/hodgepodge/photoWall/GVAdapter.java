@@ -1,4 +1,4 @@
-package com.ptchan.hodgepodge;
+package com.ptchan.hodgepodge.photoWall;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -12,6 +12,9 @@ import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+
+import com.ptchan.hodgepodge.Images;
+import com.ptchan.hodgepodge.R;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
