@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <GridView
+        android:id="@+id/gv_pic"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="ImageLoader"
-        android:gravity="center_horizontal"/>
-    <ImageView
-        android:id="@+id/iv_pic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:columnWidth="90dp"
+        android:stretchMode="columnWidth"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="10dp"
+        android:gravity="center"
         />
-</RelativeLayout>
+</LinearLayout>
