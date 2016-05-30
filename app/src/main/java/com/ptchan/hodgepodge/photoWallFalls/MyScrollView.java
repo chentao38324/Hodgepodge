@@ -7,6 +7,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -28,15 +29,13 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import android.view.View.OnTouchListener;
+
 
 /**
  * Created by chentao on 16-5-30.
  */
-public class MyScrollView extends ScrollView implements View.OnTouchListener {
-
-    private ImageLoader imageLoader;
-    private static Set<LoadImageTask> taskCollection;
-    private int columnWidth;//，每一列的宽度
+public class MyScrollView extends ScrollView implements OnTouchListener {
 
     /**
      * 每页要加载的图片数量
@@ -47,6 +46,12 @@ public class MyScrollView extends ScrollView implements View.OnTouchListener {
      * 记录当前已加载到第几页
      */
     private int page;
+
+    /**
+     * 每一列的宽度
+     */
+    private int columnWidth;
+
     /**
      * 当前第一列的高度
      */
@@ -61,6 +66,17 @@ public class MyScrollView extends ScrollView implements View.OnTouchListener {
      * 当前第三列的高度
      */
     private int thirdColumnHeight;
+
+    /**
+     * 是否已加载过一次layout，这里onLayout中的初始化只需加载一次
+     */
+    private boolean loadOnce;
+
+    /**
+     * 对图片进行管理的工具类
+     */
+    private ImageLoader imageLoader;
+
     /**
      * 第一列的布局
      */
@@ -75,10 +91,12 @@ public class MyScrollView extends ScrollView implements View.OnTouchListener {
      * 第三列的布局
      */
     private LinearLayout thirdColumn;
+
     /**
-     * 记录所有界面上的图片，用以可以随时控制对图片的释放。
+     * 记录所有正在下载或等待下载的任务。
      */
-    private List<ImageView> imageViewList = new ArrayList<ImageView>();
+    private static Set<LoadImageTask> taskCollection;
+
     /**
      * MyScrollView下的直接子布局。
      */
@@ -93,15 +111,18 @@ public class MyScrollView extends ScrollView implements View.OnTouchListener {
      * 记录上垂直方向的滚动距离。
      */
     private static int lastScrollY = -1;
-    /**
-     * 是否已加载过一次layout，这里onLayout中的初始化只需加载一次
-     */
-    private boolean loadOnce;
 
-    private static Handler handler = new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
+    /**
+     * 记录所有界面上的图片，用以可以随时控制对图片的释放。
+     */
+    private List<ImageView> imageViewList = new ArrayList<ImageView>();
+
+    /**
+     * 在Handler中进行图片可见性检查的判断，以及加载更多图片的操作。
+     */
+    private static Handler handler = new Handler() {
+
+        public void handleMessage(android.os.Message msg) {
             MyScrollView myScrollView = (MyScrollView) msg.obj;
             int scrollY = myScrollView.getScrollY();
             // 如果当前的滚动位置和上次相同，表示已停止滚动
@@ -119,10 +140,17 @@ public class MyScrollView extends ScrollView implements View.OnTouchListener {
                 // 5毫秒后再次对滚动位置进行判断
                 handler.sendMessageDelayed(message, 5);
             }
-        }
+        };
+
     };
 
 
+    /**
+     * MyScrollView的构造函数。
+     *
+     * @param context
+     * @param attrs
+     */
     public MyScrollView(Context context, AttributeSet attrs) {
         super(context, attrs);
         imageLoader = ImageLoader.getInstance();
@@ -180,11 +208,11 @@ public class MyScrollView extends ScrollView implements View.OnTouchListener {
                     task.execute(Images.imageThumbUrls[i]);
                 }
                 page++;
-            }else {
+            } else {
                 Toast.makeText(getContext(), "已没有更多图片", Toast.LENGTH_SHORT)
                         .show();
             }
-        }else {
+        } else {
             Toast.makeText(getContext(), "未发现SD卡", Toast.LENGTH_SHORT).show();
         }
     }
@@ -227,14 +255,20 @@ public class MyScrollView extends ScrollView implements View.OnTouchListener {
     /**
      * 异步下载的任务
      */
-    class LoadImageTask extends AsyncTask<String,Void,Bitmap> {
+    class LoadImageTask extends AsyncTask<String, Void, Bitmap> {
 
-        private String mImageUrl;//图片的url地址
-        private ImageView mImageView;//可重复使用的ImageView
+        /**
+         * 图片的URL地址
+         */
+        private String mImageUrl;
+
+        /**
+         * 可重复使用的ImageView
+         */
+        private ImageView mImageView;
 
         public LoadImageTask() {
         }
-
         /**
          * 将可重复使用的ImageView传入
          *
@@ -247,8 +281,9 @@ public class MyScrollView extends ScrollView implements View.OnTouchListener {
         @Override
         protected Bitmap doInBackground(String... params) {
             mImageUrl = params[0];
-            Bitmap imageBitmap = imageLoader.getBitmapFromMemoryCache(mImageUrl);
-            if (imageBitmap == null){
+            Bitmap imageBitmap = imageLoader
+                    .getBitmapFromMemoryCache(mImageUrl);
+            if (imageBitmap == null) {
                 imageBitmap = loadImage(mImageUrl);
             }
             return imageBitmap;
@@ -256,13 +291,33 @@ public class MyScrollView extends ScrollView implements View.OnTouchListener {
 
         @Override
         protected void onPostExecute(Bitmap bitmap) {
-//            super.onPostExecute(bitmap);//要注释吗？？？
             if (bitmap != null) {
-                double ratio = bitmap.getWidth()/(columnWidth*1.0);
-                int scaleHeight  = (int) (bitmap.getHeight()/ratio);
-                addImage(bitmap,columnWidth,scaleHeight);
+                double ratio = bitmap.getWidth() / (columnWidth * 1.0);
+                int scaledHeight = (int) (bitmap.getHeight() / ratio);
+                addImage(bitmap, columnWidth, scaledHeight);
             }
             taskCollection.remove(this);
+        }
+
+        /**
+         * 根据传入的url加载图片，若以存在SD卡中，直接从SD卡中取出，否则从网络下载
+         * @param imageUrl
+         * @return
+         */
+        private Bitmap loadImage(String imageUrl) {
+            File imageFile = new File(getImagePath(imageUrl));
+            if (!imageFile.exists()) {
+                downloadImage(imageUrl);
+            }
+            if (imageUrl != null) {
+                Bitmap bitmap = ImageLoader.decodeSampledBitmapFromResource(
+                        imageFile.getPath(), columnWidth);
+                if (bitmap != null) {
+                    imageLoader.addBitmapToMemoryCache(imageUrl, bitmap);
+                    return bitmap;
+                }
+            }
+            return null;
         }
 
         /**
@@ -277,10 +332,10 @@ public class MyScrollView extends ScrollView implements View.OnTouchListener {
          */
         private void addImage(Bitmap bitmap, int imageWidth, int imageHeight) {
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    imageWidth,imageHeight);
-            if (mImageView != null){
+                    imageWidth, imageHeight);
+            if (mImageView != null) {
                 mImageView.setImageBitmap(bitmap);
-            }else {
+            } else {
                 ImageView imageView = new ImageView(getContext());
                 imageView.setLayoutParams(params);
                 imageView.setImageBitmap(bitmap);
@@ -316,7 +371,8 @@ public class MyScrollView extends ScrollView implements View.OnTouchListener {
                 if (secondColumnHeight <= thirdColumnHeight) {
                     imageView.setTag(R.string.border_top, secondColumnHeight);
                     secondColumnHeight += imageHeight;
-                    imageView.setTag(R.string.border_bottom, secondColumnHeight);
+                    imageView
+                            .setTag(R.string.border_bottom, secondColumnHeight);
                     return secondColumn;
                 }
                 imageView.setTag(R.string.border_top, thirdColumnHeight);
@@ -326,32 +382,19 @@ public class MyScrollView extends ScrollView implements View.OnTouchListener {
             }
         }
 
-        /**
-         * 根据传入的url加载图片，若以存在SD卡中，直接从SD卡中取出，否则从网络下载
-         * @param imageUrl
-         * @return
-         */
-        private Bitmap loadImage(String imageUrl) {
-            File imageFile = new File(getImagePath(imageUrl));
-            if (!imageFile.exists()) {
-                downloadImage(imageUrl);
-            }
-            if (imageUrl != null) {
-                Bitmap bitmap = ImageLoader.decodeSampledBitmapFromResource(
-                        imageUrl,columnWidth);
-                if (bitmap != null) {
-                    imageLoader.addBitmapToMemoryCache(imageUrl,bitmap);
-                    return bitmap;
-                }
-            }
-            return null;
-        }
+
 
         /**
          * 将图片下载到SD卡存储起来
          * @param imageUrl
          */
         private void downloadImage(String imageUrl) {
+            if (Environment.getExternalStorageState().equals(
+                    Environment.MEDIA_MOUNTED)) {
+                Log.d("TAG", "monted sdcard");
+            } else {
+                Log.d("TAG", "has no sdcard");
+            }
             HttpURLConnection con = null;
             FileOutputStream fos = null;
             BufferedOutputStream bos = null;
@@ -359,9 +402,9 @@ public class MyScrollView extends ScrollView implements View.OnTouchListener {
             File imageFile = null;
             try {
                 URL url = new URL(imageUrl);
-                con = (HttpURLConnection)url.openConnection();
-                con.setReadTimeout(15*1000);
-                con.setConnectTimeout(5*1000);
+                con = (HttpURLConnection) url.openConnection();
+                con.setConnectTimeout(5 * 1000);
+                con.setReadTimeout(15 * 1000);
                 con.setDoInput(true);
                 con.setDoOutput(true);
                 bis = new BufferedInputStream(con.getInputStream());
@@ -393,9 +436,9 @@ public class MyScrollView extends ScrollView implements View.OnTouchListener {
             }
             if (imageFile != null) {
                 Bitmap bitmap = ImageLoader.decodeSampledBitmapFromResource(
-                        imageFile.getPath(),columnWidth);
+                        imageFile.getPath(), columnWidth);
                 if (bitmap != null) {
-                    imageLoader.addBitmapToMemoryCache(imageUrl,bitmap);
+                    imageLoader.addBitmapToMemoryCache(imageUrl, bitmap);
                 }
             }
         }
@@ -408,7 +451,7 @@ public class MyScrollView extends ScrollView implements View.OnTouchListener {
         private String getImagePath(String imageUrl) {
             int lastSlashIndex = imageUrl.lastIndexOf("/");
             String imageName = imageUrl.substring(lastSlashIndex+1);
-            String imageDir = Environment.getDownloadCacheDirectory().getPath()
+            String imageDir = Environment.getExternalStorageDirectory().getPath()
                     +"/PhotoWallFalls";
             File file = new File(imageDir);
             if (!file.exists()) {
