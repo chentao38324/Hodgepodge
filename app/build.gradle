@@ -30,4 +30,6 @@ dependencies {
     compile 'com.android.support:support-v4:23.3.0'
     //Picasso 依赖
     compile 'com.squareup.picasso:picasso:2.5.1'
+    //圆形图片
+    compile 'de.hdodenhof:circleimageview:2.0.0'
 }

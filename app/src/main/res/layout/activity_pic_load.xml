@@ -25,11 +25,18 @@
         android:gravity="center"
         android:src="@drawable/loading"
         />
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/civ"
+        android:layout_toRightOf="@id/iv_display_fresco"
+        android:layout_marginTop="200dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/head_pic"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:gravity=""
+        android:gravity="center"
         >
         <Button
             android:onClick="glide"
