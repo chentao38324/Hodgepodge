@@ -11,16 +11,29 @@
         <Button
             android:id="@+id/btn_photos_wall"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="photo wall"
-            android:layout_margin="10dp"
+            android:layout_height="50dp"
+            android:text="照片墙"
+            android:layout_margin="2dp"
+            android:background="@drawable/button"
+
             />
         <Button
             android:id="@+id/btn_photo_wall_falls"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="photo wall falls"
-            android:layout_margin="10dp"
+            android:layout_height="50dp"
+            android:text="照片墙（瀑布流）"
+            android:layout_margin="2dp"
+            android:background="@drawable/button"
+
+            />
+        <Button
+            android:id="@+id/btn_pic_load"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="图片加载框架"
+            android:layout_margin="2dp"
+            android:background="@drawable/button"
+
             />
     </LinearLayout>
 </ScrollView>

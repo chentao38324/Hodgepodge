@@ -19,6 +19,8 @@
         </activity>
         <activity android:name=".photoWall.PhotosWall"/>
         <activity android:name=".photoWallFalls.PhotoWallFalls"/>
+        <activity android:name=".photoWallFalls.ImageDetailsActivity"/>
+        <activity android:name=".PicLoadActivity"/>
     </application>
 
 </manifest>

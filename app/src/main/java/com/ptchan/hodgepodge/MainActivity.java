@@ -14,6 +14,8 @@ public class MainActivity extends Activity implements View.OnClickListener{
     public static final String TAG = "MainActivity";
     private Button btnPhotosWall;
     private Button btnPhotoWallFalls;
+    private Button btnPicLoad;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,8 @@ public class MainActivity extends Activity implements View.OnClickListener{
         btnPhotosWall.setOnClickListener(this);
         btnPhotoWallFalls = (Button)findViewById(R.id.btn_photo_wall_falls);
         btnPhotoWallFalls.setOnClickListener(this);
+        btnPicLoad = (Button)findViewById(R.id.btn_pic_load);
+        btnPicLoad.setOnClickListener(this);
     }
 
     @Override
@@ -38,6 +42,8 @@ public class MainActivity extends Activity implements View.OnClickListener{
             case R.id.btn_photo_wall_falls:
                 startActivity(new Intent(MainActivity.this,PhotoWallFalls.class));
                 break;
+            case R.id.btn_pic_load:
+                startActivity(new Intent(MainActivity.this,PicLoadActivity.class));
             default:
                 break;
         }
