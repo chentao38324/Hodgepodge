@@ -16,7 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
-import com.ptchan.hodgepodge.Images;
+import com.ptchan.hodgepodge.common.Images;
 import com.ptchan.hodgepodge.R;
 
 import java.io.BufferedInputStream;

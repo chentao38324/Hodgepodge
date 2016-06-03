@@ -1,4 +1,4 @@
-package com.ptchan.hodgepodge;
+package com.ptchan.hodgepodge.common;
 
 public class Images {
 

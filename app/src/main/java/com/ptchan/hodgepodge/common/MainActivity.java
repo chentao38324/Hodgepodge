@@ -1,12 +1,12 @@
-package com.ptchan.hodgepodge;
+package com.ptchan.hodgepodge.common;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.ptchan.hodgepodge.R;
 import com.ptchan.hodgepodge.photoWall.PhotosWall;
 import com.ptchan.hodgepodge.photoWallFalls.PhotoWallFalls;
 

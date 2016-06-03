@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.GridView;
 
-import com.ptchan.hodgepodge.Images;
+import com.ptchan.hodgepodge.common.Images;
 import com.ptchan.hodgepodge.R;
 
 /**

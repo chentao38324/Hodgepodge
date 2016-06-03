@@ -27,7 +27,7 @@
         android:src="@drawable/loading"
         />
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/civ"
+        android:id="@+id/civ_display_uil"
         android:layout_toRightOf="@id/iv_display_fresco"
         android:layout_marginTop="200dp"
         android:layout_width="200dp"
@@ -71,6 +71,16 @@
             android:layout_weight="1"
             android:layout_height="50dp"
             android:text="Fresco"
+            android:textAllCaps="false"/>
+        <Button
+            android:onClick="uil"
+            android:background="@drawable/button"
+            android:layout_margin="5dp"
+
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="50dp"
+            android:text="UIL"
             android:textAllCaps="false"/>
     </LinearLayout>
 

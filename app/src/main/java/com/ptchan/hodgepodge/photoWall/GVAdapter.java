@@ -13,7 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 
-import com.ptchan.hodgepodge.Images;
+import com.ptchan.hodgepodge.common.Images;
 import com.ptchan.hodgepodge.R;
 
 import java.net.HttpURLConnection;
