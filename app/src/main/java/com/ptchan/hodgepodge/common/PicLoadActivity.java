@@ -5,9 +5,11 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ListView;
 
 import com.bumptech.glide.Glide;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.ptchan.hodgepodge.R;
 import com.squareup.picasso.Picasso;
@@ -52,13 +54,21 @@ public class PicLoadActivity extends Activity {
 
     public void uil(View v) {
         String imageUrl = "chrome-extension://laookkfknpbbblfpciffpaejjkokdgca/backgrounds/3068befa-45dd-491c-a506-66b86a5c65f4.jpg";
-        ImageLoader.getInstance().loadImage(imageUrl,new SimpleImageLoadingListener(){
+
+        //loadImage()
+        /*ImageLoader.getInstance().loadImage(imageUrl,new SimpleImageLoadingListener(){
             @Override
             public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
                 super.onLoadingComplete(imageUri, view, loadedImage);
                 circleImageView_uil.setImageBitmap(loadedImage);
             }
-        });
+        });*/
+
+        //displayImage()
+        ImageLoader.getInstance().displayImage(imageUrl,circleImageView_uil);
+
+        ListView listView = new ListView(this);
+        listView.setOnScrollListener(new PauseOnScrollListener(ImageLoader.getInstance(),true,true));
     }
 
     @Override
