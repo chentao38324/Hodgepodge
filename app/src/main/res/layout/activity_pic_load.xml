@@ -26,15 +26,28 @@
         android:gravity="center"
         android:src="@drawable/loading"
         />
+    <FrameLayout
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="200dp"
+        android:layout_toRightOf="@id/iv_display_fresco">
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/civ_display_uil"
         android:layout_toRightOf="@id/iv_display_fresco"
-        android:layout_marginTop="200dp"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:civ_border_width="2dp"
         app:civ_border_color="#e34"
         android:src="@drawable/head_pic"/>
+        <TextView
+            android:id="@+id/tv_progress"
+            android:text="loading..."
+            android:textColor="#000"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"/>
+    </FrameLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
