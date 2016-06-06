@@ -2,6 +2,7 @@ package com.ptchan.hodgepodge.common;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,6 +10,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingProgressListener;
@@ -26,7 +28,7 @@ public class PicLoadActivity extends Activity {
 
     private ImageView imageView_glide;
     private ImageView imageView_picasso;
-    private ImageView imageView_fresco;
+    private SimpleDraweeView simpleDraweeView_fresco;
     private CircleImageView circleImageView_uil;
     private TextView tvProgress;
 
@@ -36,9 +38,10 @@ public class PicLoadActivity extends Activity {
         setContentView(R.layout.activity_pic_load);
         imageView_glide = (ImageView)findViewById(R.id.iv_display_glide);
         imageView_picasso = (ImageView)findViewById(R.id.iv_display_picasso);
-        imageView_fresco = (ImageView)findViewById(R.id.iv_display_fresco);
+        simpleDraweeView_fresco = (SimpleDraweeView) findViewById(R.id.sdv_display_fresco);
         circleImageView_uil = (CircleImageView)findViewById(R.id.civ_display_uil);
         tvProgress = (TextView)findViewById(R.id.tv_progress);
+
     }
 
     public void glide(View v){
@@ -54,7 +57,8 @@ public class PicLoadActivity extends Activity {
     }
 
     public void fresco(View v){
-
+        Uri uri = Uri.parse("http://img.my.csdn.net/uploads/201308/31/1377949642_6939.jpg");
+        simpleDraweeView_fresco.setImageURI(uri);
     }
 
     public void uil(View v) {
@@ -81,7 +85,13 @@ public class PicLoadActivity extends Activity {
 
         //displayImage()
         ImageLoader.getInstance().displayImage(imageUrl, circleImageView_uil, options,
-                new SimpleImageLoadingListener(), new ImageLoadingProgressListener() {
+                new SimpleImageLoadingListener(){
+                    @Override
+                    public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                        super.onLoadingComplete(imageUri, view, loadedImage);
+                        tvProgress.setText("");
+                    }
+                }, new ImageLoadingProgressListener() {
                     @Override
                     public void onProgressUpdate(String s, View view, int current, int total) {
                         tvProgress.setText((int)(current*1.0/total*100)+"%");

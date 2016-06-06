@@ -32,5 +32,10 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.1'
     //圆形图片
     compile 'de.hdodenhof:circleimageview:2.0.0'
+    //UIL导的jar包
     compile files('libs/universal-image-loader-1.9.5.jar')
+    //Fresco 依赖
+    compile 'com.facebook.fresco:fresco:0.10.0'
+    //Butterknife 依赖
+    compile 'com.jakewharton:butterknife:8.0.1'
 }
