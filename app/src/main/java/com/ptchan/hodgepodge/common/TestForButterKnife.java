@@ -37,6 +37,7 @@ public class TestForButterKnife extends Activity {
         //两种方法获得LayoutInflater实例
         LayoutInflater layoutInflater = LayoutInflater.from(this);
         LayoutInflater layoutInflater1 = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        layoutInflater.inflate(R.layout.lv_item,null);
     }
 
     @OnClick({R.id.tv1, R.id.tv2, R.id.tv3})
