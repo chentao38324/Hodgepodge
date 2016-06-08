@@ -30,13 +30,13 @@ public class TestForButterKnife extends Activity {
     TextView tv4;
     @BindView(R.id.tv5)
     TextView tv5;
-    private ImageView btn;
+    @BindView(R.id.btn)
+    ImageView btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lv_item);
-        btn = (ImageView) findViewById(R.id.btn);
         ButterKnife.bind(this);
         //两种方法获得LayoutInflater实例
 //        LayoutInflater layoutInflater = LayoutInflater.from(this);
@@ -45,13 +45,13 @@ public class TestForButterKnife extends Activity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG,"onClick excute");
+                Log.d(TAG, "onClick excute");
             }
         });
         btn.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                Log.d(TAG,"onTouch excute,action:"+event.getAction());
+                Log.d(TAG, "onTouch excute,action:" + event.getAction());
                 return false;
             }
         });
