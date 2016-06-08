@@ -12,7 +12,6 @@ import com.ptchan.hodgepodge.photoWallFalls.PhotoWallFalls;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class MainActivity extends Activity implements View.OnClickListener {
     public static final String TAG = "MainActivity";
@@ -30,16 +29,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     private void init() {
-        ButterKnife.bind(this);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
         btnPhotosWall = (Button) findViewById(R.id.btn_photos_wall);
         btnPhotosWall.setOnClickListener(this);
         btnPhotoWallFalls = (Button) findViewById(R.id.btn_photo_wall_falls);
         btnPhotoWallFalls.setOnClickListener(this);
         btnPicLoad = (Button) findViewById(R.id.btn_pic_load);
         btnPicLoad.setOnClickListener(this);
-        onClick();
-//        btnBk.setOnClickListener(this);
+        btnBk.setOnClickListener(this);
     }
 
     @Override
@@ -54,14 +52,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
             case R.id.btn_pic_load:
                 startActivity(new Intent(MainActivity.this, PicLoadActivity.class));
                 break;
+            case R.id.btn_bk:
+                startActivity(new Intent(MainActivity.this, TestForButterKnife.class));
+                break;
             default:
                 break;
         }
-    }
-
-    @OnClick(R.id.btn_bk)
-    public void onClick() {
-        startActivity(new Intent(MainActivity.this,TestForButterKnife.class));
     }
 }
 

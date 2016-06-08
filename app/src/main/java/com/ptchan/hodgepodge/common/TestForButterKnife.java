@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ptchan.hodgepodge.R;
@@ -30,13 +30,13 @@ public class TestForButterKnife extends Activity {
     TextView tv4;
     @BindView(R.id.tv5)
     TextView tv5;
-    @BindView(R.id.btn)
-    Button btn;
+    private ImageView btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lv_item);
+        btn = (ImageView) findViewById(R.id.btn);
         ButterKnife.bind(this);
         //两种方法获得LayoutInflater实例
 //        LayoutInflater layoutInflater = LayoutInflater.from(this);
