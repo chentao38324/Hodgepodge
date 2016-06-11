@@ -34,7 +34,6 @@
         android:layout_height="wrap_content"
         android:textAllCaps="false"
         android:src="@drawable/loading"
-        android:clickable="false"
         />
 
 </LinearLayout>

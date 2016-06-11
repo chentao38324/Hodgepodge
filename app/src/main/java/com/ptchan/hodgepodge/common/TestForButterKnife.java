@@ -42,12 +42,12 @@ public class TestForButterKnife extends Activity {
 //        LayoutInflater layoutInflater = LayoutInflater.from(this);
 //        LayoutInflater layoutInflater1 = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 //        layoutInflater.inflate(R.layout.lv_item,null);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "onClick excute");
-            }
-        });
+//        btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Log.d(TAG, "onClick excute");
+//            }
+//        });
         btn.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
