@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAllCaps="false"
-        android:src="@drawable/loading"
+        android:src="@drawable/load_fail"
         />
 
 </LinearLayout>
