@@ -32,7 +32,7 @@ public class ImageDetailsActivity extends Activity {
         String imagePath = getIntent().getStringExtra("image_path");
         Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
         zoomImageView.setImageBitmap(bitmap);
-
+        //手势监控
         mGestureDetector = new GestureDetector(this,new GestureDetector.SimpleOnGestureListener(){
             @Override
             public boolean onSingleTapUp(MotionEvent e) {
