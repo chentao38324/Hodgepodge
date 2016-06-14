@@ -35,11 +35,20 @@ public class ImageDetailsActivity extends Activity {
         //手势监控
         mGestureDetector = new GestureDetector(this,new GestureDetector.SimpleOnGestureListener(){
             @Override
-            public boolean onSingleTapUp(MotionEvent e) {
+            public boolean onSingleTapConfirmed(MotionEvent e) {
                 Log.d(TAG,"sinlge tap");
                 finish();
-                return super.onSingleTapUp(e);
+                return false;//返回true 才能获取到完整的事件
             }
+
+            @Override
+            public boolean onDoubleTap(MotionEvent e) {
+                //双击放大图片
+                Log.d(TAG,"double tap");
+                return true;
+            }
+
+
         });
         zoomImageView.setOnTouchListener(new View.OnTouchListener() {
             @Override
