@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.util.AttributeSet;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -145,6 +146,7 @@ public class ZoomImageView extends View {
         public void onClick();
     }
 
+
     /**
      * ZoomImageView构造函数，将当前操作状态设为STATUS_INIT。
      *
@@ -254,6 +256,7 @@ public class ZoomImageView extends View {
                 if (listener != null) {
                     listener.onClick();
                 }
+
                 break;
             default:
                 break;

@@ -5,6 +5,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 
@@ -17,6 +19,9 @@ public class ImageDetailsActivity extends Activity {
 
     public static final String TAG = "ImageDetailsActivity";
     private ZoomImageView zoomImageView;
+    //GestureDetector
+    private GestureDetector mGestureDetector;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,12 +33,20 @@ public class ImageDetailsActivity extends Activity {
         Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
         zoomImageView.setImageBitmap(bitmap);
 
-        /*zoomImageView.setOnClickListener(new ZoomImageView.OnClickListener() {
+        mGestureDetector = new GestureDetector(this,new GestureDetector.SimpleOnGestureListener(){
             @Override
-            public void onClick() {
-                Log.d(TAG,"define onClick");
+            public boolean onSingleTapUp(MotionEvent e) {
+                Log.d(TAG,"sinlge tap");
                 finish();
+                return super.onSingleTapUp(e);
             }
-        });*/
+        });
+        zoomImageView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                mGestureDetector.onTouchEvent(event);
+                return false;
+            }
+        });
     }
 }
