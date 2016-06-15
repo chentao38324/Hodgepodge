@@ -9,18 +9,27 @@ import android.widget.Button;
 import com.ptchan.hodgepodge.R;
 import com.ptchan.hodgepodge.photoWall.PhotosWall;
 import com.ptchan.hodgepodge.photoWallFalls.PhotoWallFalls;
+import com.ptchan.hodgepodge.scroller.ScrollerActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends Activity implements View.OnClickListener {
+public class MainActivity extends Activity {
     public static final String TAG = "MainActivity";
     @BindView(R.id.btn_bk)
     Button btnBk;
-    private Button btnPhotosWall;
-    private Button btnPhotoWallFalls;
-    private Button btnPicLoad;
+    @BindView(R.id.btn_scroller)
+    Button btnScroller;
+    @BindView(R.id.btn_photos_wall)
+    Button btnPhotosWall;
+    @BindView(R.id.btn_photo_wall_falls)
+    Button btnPhotoWallFalls;
+    @BindView(R.id.btn_pic_load)
+    Button btnPicLoad;
+//    private Button btnPhotosWall;
+//    private Button btnPhotoWallFalls;
+//    private Button btnPicLoad;
 
 
     @Override
@@ -32,17 +41,19 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private void init() {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        btnPhotosWall = (Button) findViewById(R.id.btn_photos_wall);
-        btnPhotosWall.setOnClickListener(this);
-        btnPhotoWallFalls = (Button) findViewById(R.id.btn_photo_wall_falls);
-        btnPhotoWallFalls.setOnClickListener(this);
-        btnPicLoad = (Button) findViewById(R.id.btn_pic_load);
-        btnPicLoad.setOnClickListener(this);
+//        btnPhotosWall = (Button) findViewById(R.id.btn_photos_wall);
+//        btnPhotosWall.setOnClickListener(this);
+//        btnPhotoWallFalls = (Button) findViewById(R.id.btn_photo_wall_falls);
+//        btnPhotoWallFalls.setOnClickListener(this);
+//        btnPicLoad = (Button) findViewById(R.id.btn_pic_load);
+//        btnPicLoad.setOnClickListener(this);
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
+
+
+    @OnClick({R.id.btn_photos_wall, R.id.btn_photo_wall_falls, R.id.btn_pic_load, R.id.btn_bk, R.id.btn_scroller})
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.btn_photos_wall:
                 startActivity(new Intent(MainActivity.this, PhotosWall.class));
                 break;
@@ -52,14 +63,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
             case R.id.btn_pic_load:
                 startActivity(new Intent(MainActivity.this, PicLoadActivity.class));
                 break;
-            default:
+            case R.id.btn_bk:
+                startActivity(new Intent(MainActivity.this, TestForButterKnife.class));
+                break;
+            case R.id.btn_scroller:
+                startActivity(new Intent(MainActivity.this, ScrollerActivity.class));
                 break;
         }
-    }
-
-    @OnClick(R.id.btn_bk)
-    public void onClick() {
-        startActivity(new Intent(MainActivity.this, TestForButterKnife.class));
     }
 }
 

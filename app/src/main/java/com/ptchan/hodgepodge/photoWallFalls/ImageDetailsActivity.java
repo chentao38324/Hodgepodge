@@ -36,6 +36,7 @@ public class ImageDetailsActivity extends Activity {
         mGestureDetector = new GestureDetector(this,new GestureDetector.SimpleOnGestureListener(){
             @Override
             public boolean onSingleTapConfirmed(MotionEvent e) {
+                //单击返回 不属于双击中的一次单击
                 Log.d(TAG,"sinlge tap");
                 finish();
                 return false;//返回true 才能获取到完整的事件

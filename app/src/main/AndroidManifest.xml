@@ -23,6 +23,7 @@
         <activity android:name=".photoWallFalls.ImageDetailsActivity"/>
         <activity android:name=".common.PicLoadActivity"/>
         <activity android:name=".common.TestForButterKnife"/>
+        <activity android:name=".scroller.ScrollerActivity"/>
     </application>
 
 </manifest>
