@@ -1,4 +1,4 @@
-package com.ptchan.hodgepodge.ui;
+package com.ptchan.hodgepodge.title;
 
 import android.app.Activity;
 import android.content.Context;
@@ -19,19 +19,21 @@ import butterknife.OnClick;
  */
 public class TitleView extends FrameLayout {
 
-    @BindView(R.id.btn_left)
-    Button btnLeft;//左边按钮
-    @BindView(R.id.title_text)
-    TextView titleText;//中间标题
+//    @BindView(R.id.btn_left)
+    private Button btnLeft;//左边按钮
+//    @BindView(R.id.title_text)
+    private TextView titleText;//中间标题
 
 
     public TitleView(Context context, AttributeSet attrs) {
         super(context, attrs);
         LayoutInflater.from(context).inflate(R.layout.title, this);
-        ButterKnife.bind((Activity)context);
+//        ButterKnife.bind((Activity)context);
+        btnLeft = (Button)findViewById(R.id.btn_left);
+        titleText = (TextView)findViewById(R.id.title_text);
     }
 
-    @OnClick(R.id.btn_left)
+//    @OnClick(R.id.btn_left)
     public void onClick() {
         ((Activity)getContext()).finish();
     }
@@ -50,6 +52,9 @@ public class TitleView extends FrameLayout {
         btnLeft.setText(text);
     }
 
+    /**
+     * 更改左边按钮点击事件
+     * */
     public void setLeftButtonListener(OnClickListener l){
         btnLeft.setOnClickListener(l);
     }

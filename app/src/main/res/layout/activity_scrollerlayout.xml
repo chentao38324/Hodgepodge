@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.ptchan.hodgepodge.scroller.ScrollerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.ptchan.hodgepodge.title.TitleView
+        android:id="@+id/scroller_title"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"/>
+<com.ptchan.hodgepodge.scroller.ScrollerLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <Button
@@ -24,3 +33,4 @@
         android:padding="@dimen/activity_horizontal_margin"
         android:background="@color/colorPrimaryDark"/>
 </com.ptchan.hodgepodge.scroller.ScrollerLayout>
+</LinearLayout>

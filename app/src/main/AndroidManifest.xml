@@ -24,6 +24,7 @@
         <activity android:name=".common.PicLoadActivity"/>
         <activity android:name=".common.TestForButterKnife"/>
         <activity android:name=".scroller.ScrollerActivity"/>
+        <activity android:name=".title.TitleActivity"/>
     </application>
 
 </manifest>
