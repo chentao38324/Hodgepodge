@@ -25,12 +25,13 @@ public class ScrollerActivity extends Activity {
         setContentView(R.layout.activity_scrollerlayout);
 //        ButterKnife.bind(this);
         scrollerTitle = (TitleView) findViewById(R.id.scroller_title);
-        scrollerTitle.setLeftButtonListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+//        scrollerTitle.setLeftButtonListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                finish();
+//            }
+//        });
+        scrollerTitle.setTitleText("滑动测试");
     }
 
 //    @OnClick(R.id.scroller_title)
