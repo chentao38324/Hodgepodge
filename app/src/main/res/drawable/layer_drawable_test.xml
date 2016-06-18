@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#0ac39e" />
+        </shape>
+    </item>
+    <item android:bottom="6dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#ffffff" />
+        </shape>
+    </item>
+    <item
+        android:left="1dp"
+        >
+        <shape android:shape="rectangle">
+            <solid android:color="#ffffff" />
+        </shape>
+    </item>
+
+</layer-list>
+<!--<layer-list xmlns:android="http://schemas.android.com/apk/res/android">-->
+    <!--&lt;!&ndash;最底层&ndash;&gt;-->
+    <!--<item>-->
+        <!--<bitmap android:src="@drawable/loading"-->
+            <!--android:gravity="center" />-->
+    <!--</item>-->
+    <!--&lt;!&ndash;次上层&ndash;&gt;-->
+    <!--<item android:top="10dp" android:left="10dp">-->
+        <!--<shape android:shape="rectangle">-->
+            <!--<solid android:color="#ff9"/>-->
+        <!--</shape>-->
+    <!--</item>-->
+    <!--&lt;!&ndash;显示在最上面&ndash;&gt;-->
+    <!--<item android:top="20dp" android:left="20dp">-->
+        <!--<shape android:shape="rectangle">-->
+            <!--<solid android:color="#fff"/>-->
+        <!--</shape>-->
+    <!--</item>-->
+<!--</layer-list>-->

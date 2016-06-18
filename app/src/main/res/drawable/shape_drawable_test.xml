@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle"
+    android:useLevel="false"
+    >
+    <!--shape的四个角度-->
+    <corners
+        android:radius="5dp"
+        android:topLeftRadius="8dp"
+        />
+    <!--渐变色，与solid互斥-->
+    <gradient
+        android:angle="45"
+        android:startColor="@color/green"
+        android:centerColor="@color/titleGreen"
+        android:endColor="@color/colorAccent"
+        android:gradientRadius="10dp"
+        android:useLevel="false"
+        android:type="sweep"
+        />
+    <!--<solid-->
+        <!--android:color="@color/green"/>-->
+    <!--包含它的view的空白-->
+    <padding
+        />
+    <!--shape的大小,这是设置的固有宽高Intrinsic-->
+    <size
+        android:width="50dp"
+        android:height="50dp"
+        />
+    <stroke
+        android:width="2dp"
+        android:color="@color/colorAccent"
+        android:dashWidth="4dp"
+        android:dashGap="79dp"
+        />
+
+</shape>
