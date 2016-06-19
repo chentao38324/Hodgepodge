@@ -28,6 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="item"/>
+    <!--imageView's src and background is different-->
     <ImageView
         android:id="@+id/btn"
         android:layout_width="wrap_content"
