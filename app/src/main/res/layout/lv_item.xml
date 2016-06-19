@@ -30,10 +30,14 @@
         android:text="item"/>
     <ImageView
         android:id="@+id/btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:background="@drawable/animation_drawable_test"
+        />
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:textAllCaps="false"
-        android:src="@drawable/layer_drawable_test"
-        />
+        android:background="@drawable/layer_drawable_test"/>
 
 </LinearLayout>
