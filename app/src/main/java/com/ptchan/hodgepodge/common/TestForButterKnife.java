@@ -61,6 +61,7 @@ public class TestForButterKnife extends Activity {
 //        btn.setBackgroundResource(R.drawable.animation_drawable_test);
         drawable = (AnimationDrawable) btn.getBackground();
         drawable.start();
+
     }
 
     @OnClick({R.id.tv1, R.id.tv2, R.id.tv3})
