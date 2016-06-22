@@ -42,4 +42,6 @@ dependencies {
     apt 'com.jakewharton:butterknife-compiler:8.0.1'
     //okhttp 依赖
     testCompile 'com.squareup.okhttp3:mockwebserver:3.3.1'
+    //DisLruCache
+    compile 'com.jakewharton:disklrucache:2.0.2'
 }
