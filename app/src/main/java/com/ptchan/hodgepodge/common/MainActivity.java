@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.jakewharton.disklrucache.DiskLruCache;
 import com.ptchan.hodgepodge.R;
 import com.ptchan.hodgepodge.photoWall.PhotosWall;
 import com.ptchan.hodgepodge.photoWallFalls.PhotoWallFalls;
