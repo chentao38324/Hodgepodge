@@ -48,5 +48,5 @@ dependencies {
     //DisLruCache
     compile 'com.jakewharton:disklrucache:2.0.2'
     //multidex
-    compile 'com.android.support:multidex:1.0.0'
+    compile 'com.android.support:multidex:1.0.1'
 }
