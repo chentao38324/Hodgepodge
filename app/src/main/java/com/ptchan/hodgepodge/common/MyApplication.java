@@ -12,6 +12,7 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.decode.BaseImageDecoder;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import com.ptchan.hodgepodge.R;
+import com.ptchan.hodgepodge.user.UserBean;
 
 /**
  * Created by chentao on 16-6-3.
@@ -56,5 +57,17 @@ public class MyApplication extends Application {
                 .build();
         //Initialize ImageLoader with configuration.
         ImageLoader.getInstance().init(configuration);
+    }
+
+    //用户个人信息
+    private UserBean user;
+
+    public UserBean getUser() {
+        return user;
+    }
+
+    public void setUser(UserBean user) {
+        this.user = user;
+
     }
 }
