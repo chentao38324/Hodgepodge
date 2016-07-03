@@ -8,7 +8,14 @@ public class CrashTest {
     /**
      * out of memory
      */
-    public static void oom(){
+    public static void oomEx(){
+
+    }
+
+    /**
+     *NullPointException
+     */
+    public static void nullPointEx(){
 
     }
 }
