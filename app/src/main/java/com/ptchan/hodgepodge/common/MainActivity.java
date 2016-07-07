@@ -42,12 +42,14 @@ public class MainActivity extends Activity {
     private void init() {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        //just for record
 //        btnPhotosWall = (Button) findViewById(R.id.btn_photos_wall);
 //        btnPhotosWall.setOnClickListener(this);
 //        btnPhotoWallFalls = (Button) findViewById(R.id.btn_photo_wall_falls);
 //        btnPhotoWallFalls.setOnClickListener(this);
 //        btnPicLoad = (Button) findViewById(R.id.btn_pic_load);
 //        btnPicLoad.setOnClickListener(this);
+
     }
 
 
