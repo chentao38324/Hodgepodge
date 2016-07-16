@@ -5,4 +5,5 @@ package com.ptchan.androidlib;
  * request Json Data
  */
 public class JsonRequest {
+    //it's function is to chansfurm the jsondata to object
 }
