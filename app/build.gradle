@@ -49,4 +49,6 @@ dependencies {
     compile 'com.jakewharton:disklrucache:2.0.2'
     //multidex
     compile 'com.android.support:multidex:1.0.1'
+    //RecyclerView 依赖
+    compile 'com.android.support:recyclerview-v7:23.2.0'
 }
