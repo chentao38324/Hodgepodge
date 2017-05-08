@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<weather>
+    <city id = "1">
+        <name>上海</name>
+        <temp>8°</temp>
+        <pm>80</pm>
+    </city>
+    <city id = "2">
+        <name>北京</name>
+        <temp>3°</temp>
+        <pm>300</pm>
+    </city>
+    <city id = "3">
+        <name>西安</name>
+        <temp>12°</temp>
+        <pm>60</pm>
+    </city>
+</weather>
